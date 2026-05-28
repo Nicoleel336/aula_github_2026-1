@@ -3,6 +3,7 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
         ClienteService clienteService = new ClienteService();
+        ContaService contaService = new ContaService(clienteService);
 
         boolean executando = true;
 
@@ -11,7 +12,7 @@ public class Main {
             int opcaoSelecionada = mainMenu.getSelection();
 
             if (opcaoSelecionada == 1) {
-                System.out.println("Modulo Conta ainda nao implementado.");
+                executarMenuConta(contaService);
             } else if (opcaoSelecionada == 2) {
                 executarMenuCliente(clienteService);
             } else if (opcaoSelecionada == 3) {
@@ -24,6 +25,19 @@ public class Main {
         }
 
         System.out.println("Fim");
+    }
+
+    private static void executarMenuConta(ContaService contaService) {
+        Menu contaMenu = new Menu("Menu Conta", Arrays.asList("Abrir Conta", "Voltar"));
+        int opcaoConta = contaMenu.getSelection();
+
+        if (opcaoConta == 1) {
+            contaService.abrirConta();
+        } else if (opcaoConta == 2) {
+            System.out.println("Retornando ao menu principal.");
+        } else {
+            System.out.println("Opcao invalida.");
+        }
     }
 
     private static void executarMenuCliente(ClienteService clienteService) {

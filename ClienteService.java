@@ -116,6 +116,10 @@ public class ClienteService {
         return null;
     }
 
+    public Cliente encontrarClientePorCpf(String cpf) {
+        return buscarClientePorCpf(cpf);
+    }
+
     private String lerCampoObrigatorio(String nomeCampo) {
         String valor;
 
