@@ -25,6 +25,37 @@ public class ClienteService {
         System.out.println(cliente);
     }
 
+    public void consultarCliente() {
+        System.out.println("\n=== Consulta de Cliente ===");
+
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente cadastrado.");
+            return;
+        }
+
+        String cpf = lerCampoObrigatorio("CPF do cliente");
+
+        Cliente clienteEncontrado = buscarClientePorCpf(cpf);
+
+        if (clienteEncontrado == null) {
+            System.out.println("Cliente nao encontrado.");
+            return;
+        }
+
+        System.out.println("\nCliente encontrado:");
+        System.out.println(clienteEncontrado);
+    }
+
+    private Cliente buscarClientePorCpf(String cpf) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                return cliente;
+            }
+        }
+
+        return null;
+    }
+
     private String lerCampoObrigatorio(String nomeCampo) {
         String valor;
 
@@ -33,7 +64,7 @@ public class ClienteService {
             valor = scanner.nextLine().trim();
 
             if (valor.isEmpty()) {
-                System.out.println("O campo " + nomeCampo + " é obrigatório.");
+                System.out.println("O campo " + nomeCampo + " e obrigatorio.");
             }
         } while (valor.isEmpty());
 
