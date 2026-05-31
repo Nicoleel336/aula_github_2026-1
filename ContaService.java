@@ -122,10 +122,7 @@ public class ContaService {
         }
 
         return false;
-    }
-<<<<<<< Updated upstream
-=======
-    
+    }    
     public void realizarSaque() {
         System.out.println("\n=== Realizar Saque ===");
 
@@ -164,6 +161,7 @@ public class ContaService {
         
         contaEncontrada.registrarSaque(valorSaque);
 
+        contaEncontrada.debitar(valorSaque);
         System.out.println("\nSaque realizado com sucesso!");
         System.out.println("Novo saldo: R$ " + String.format("%.2f", contaEncontrada.getSaldo()));
     }
@@ -187,5 +185,5 @@ public class ContaService {
             }
         }
     }
->>>>>>> Stashed changes
+
 }
