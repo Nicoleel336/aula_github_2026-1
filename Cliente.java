@@ -2,11 +2,17 @@ public class Cliente {
     private final String nome;
     private final String cpf;
     private final String email;
+    private boolean ativo;
 
-    public Cliente(String nome, String cpf, String email) {
+    public Cliente(String nome, String cpf, String email, Boolean ativo) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+        this.ativo = true;
+    }
+
+    public Boolean isAtivo() {
+        return ativo;
     }
 
     public String getNome() {
@@ -25,6 +31,7 @@ public class Cliente {
     public String toString() {
         return "Nome: " + nome + "\n" +
                "CPF: " + cpf + "\n" +
-               "E-mail: " + email;
+               "E-mail: " + email + "\n" +
+               "Status: " + (ativo ? "Ativo" : "Inativo");
     }
 }
