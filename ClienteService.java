@@ -35,7 +35,8 @@ public class ClienteService {
             }
         } while (email.isEmpty());
 
-        Cliente cliente = new Cliente(nome, cpf, email);
+        boolean ativo = true;
+        Cliente cliente = new Cliente(nome, cpf, email, ativo);
         clientes.add(cliente);
 
         System.out.println("\nCliente cadastrado com sucesso!");
@@ -82,6 +83,48 @@ public class ClienteService {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public void desativarCliente() {
+        System.out.println("\n=== Desativar Cliente ===");
+
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente cadastrado.");
+            return;
+        }
+
+        String cpf = lerCampoObrigatorio("CPF do cliente que deseja desativar");
+        Cliente clienteEncontrado = buscarClientePorCpf(cpf);
+
+        if (clienteEncontrado == null) {
+            System.out.println("Cliente nao encontrado.");
+            return;
+        }
+
+        if (!clienteEncontrado.isAtivo()) {
+            System.out.println("Este cliente ja esta desativado.");
+            return;
+        }
+
+        System.out.print("Tem certeza que deseja desativar o cliente " + clienteEncontrado.getCpf() + "? (S/N): ");
+        String confirmacao = scanner.nextLine().trim().toUpperCase();
+
+        if (confirmacao.equals("S")) {
+            int index = clientes.indexOf(clienteEncontrado);
+            if (index >= 0) {
+                Cliente clienteDesativado = new Cliente(
+                        clienteEncontrado.getNome(),
+                        clienteEncontrado.getCpf(),
+                        clienteEncontrado.getEmail(),
+                        false
+                );
+                clientes.set(index, clienteDesativado);
+                clienteEncontrado = clienteDesativado;
+            }
+            System.out.println("Cliente desativado com sucesso!");
+        } else {
+            System.out.println("Operacao cancelada.");
         }
     }
 
