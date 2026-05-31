@@ -7,9 +7,9 @@ public class Conta {
     private final double saldoInicial;
     private double saldo;
     private final Cliente cliente;
-    private double limiteDiarioSaque = 1000.00; 
+    private final double limiteDiarioSaque = 1000.00; 
     private double saquesRealizadosHoje = 0.0;
-    private List<Transacao> transacoes;  
+    private final List<Transacao> transacoes;  
 
     public Conta(String numero, String tipo, double saldoInicial, Cliente cliente) {
         this.numero = numero;

@@ -120,7 +120,6 @@ public class ClienteService {
                         false
                 );
                 clientes.set(index, clienteDesativado);
-                clienteEncontrado = clienteDesativado;
             }
             System.out.println("Cliente desativado com sucesso!");
         } else {

@@ -2,7 +2,7 @@ public class Cliente {
     private final String nome;
     private final String cpf;
     private final String email;
-    private boolean ativo;
+    private final boolean ativo;
 
     public Cliente(String nome, String cpf, String email, Boolean ativo) {
         this.nome = nome;
