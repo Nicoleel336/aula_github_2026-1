@@ -4,6 +4,8 @@ public class Conta {
     private final double saldoInicial;
     private double saldo;
     private final Cliente cliente;
+    private double limiteDiarioSaque = 1000.00; 
+    private double saquesRealizadosHoje = 0.0;  
 
     public Conta(String numero, String tipo, double saldoInicial, Cliente cliente) {
         this.numero = numero;
@@ -31,6 +33,14 @@ public class Conta {
 
     public Cliente getCliente() {
         return cliente;
+    }
+    
+    public double getLimiteDisponivel() {
+        return limiteDiarioSaque - saquesRealizadosHoje;
+    }
+
+    public void registrarSaque(double valor) {
+        this.saquesRealizadosHoje += valor;
     }
     
     public void debitar(double valor) {

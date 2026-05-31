@@ -122,8 +122,7 @@ public class ContaService {
         }
 
         return false;
-    }
-    
+    }    
     public void realizarSaque() {
         System.out.println("\n=== Realizar Saque ===");
 
@@ -152,6 +151,16 @@ public class ContaService {
             return;
         }
 
+        if (valorSaque > contaEncontrada.getLimiteDisponivel()) {
+            System.out.println("Erro: Limite diário de saque excedido.");
+            System.out.println("Seu limite restante para saques hoje e de: R$ " + String.format("%.2f", contaEncontrada.getLimiteDisponivel()));
+            return;
+        }
+
+        contaEncontrada.debitar(valorSaque);
+        
+        contaEncontrada.registrarSaque(valorSaque);
+
         contaEncontrada.debitar(valorSaque);
         System.out.println("\nSaque realizado com sucesso!");
         System.out.println("Novo saldo: R$ " + String.format("%.2f", contaEncontrada.getSaldo()));
@@ -176,4 +185,5 @@ public class ContaService {
             }
         }
     }
+
 }
