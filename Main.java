@@ -16,7 +16,7 @@ public class Main {
             } else if (opcaoSelecionada == 2) {
                 executarMenuCliente(clienteService);
             } else if (opcaoSelecionada == 3) {
-                System.out.println("Modulo Operacoes ainda nao implementado.");
+                executarMenuOperacoes(contaService);
             } else if (opcaoSelecionada == 4) {
                 executando = false;
             } else {
@@ -49,6 +49,19 @@ public class Main {
         } else if (opcaoCliente == 2) {
             clienteService.consultarCliente();
         } else if (opcaoCliente == 3) {
+            System.out.println("Retornando ao menu principal.");
+        } else {
+            System.out.println("Opcao invalida.");
+        }
+    }
+
+    private static void executarMenuOperacoes(ContaService contaService) {
+        Menu operacoesMenu = new Menu("Menu Operacoes", Arrays.asList("Realizar Saque", "Voltar"));
+        int opcaoOperacao = operacoesMenu.getSelection();
+
+        if (opcaoOperacao == 1) {
+            contaService.realizarSaque();
+        } else if (opcaoOperacao == 2) {
             System.out.println("Retornando ao menu principal.");
         } else {
             System.out.println("Opcao invalida.");
