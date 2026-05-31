@@ -123,4 +123,69 @@ public class ContaService {
 
         return false;
     }
+<<<<<<< Updated upstream
+=======
+    
+    public void realizarSaque() {
+        System.out.println("\n=== Realizar Saque ===");
+
+        if (contas.isEmpty()) {
+            System.out.println("Nenhuma conta cadastrada no sistema.");
+            return;
+        }
+
+        String numeroConta = lerCampoObrigatorio("Numero da conta");
+        Conta contaEncontrada = buscarContaPorNumero(numeroConta);
+
+        if (contaEncontrada == null) {
+            System.out.println("Erro: Conta nao encontrada.");
+            return;
+        }
+
+        double valorSaque = lerValorOperacao("Valor do saque");
+
+        if (valorSaque <= 0) {
+            System.out.println("Erro: O valor do saque deve ser maior que zero.");
+            return;
+        }
+
+        if (valorSaque > contaEncontrada.getSaldo()) {
+            System.out.println("Erro: Saldo insuficiente. Seu saldo atual e R$ " + String.format("%.2f", contaEncontrada.getSaldo()));
+            return;
+        }
+
+        if (valorSaque > contaEncontrada.getLimiteDisponivel()) {
+            System.out.println("Erro: Limite diário de saque excedido.");
+            System.out.println("Seu limite restante para saques hoje e de: R$ " + String.format("%.2f", contaEncontrada.getLimiteDisponivel()));
+            return;
+        }
+
+        contaEncontrada.debitar(valorSaque);
+        
+        contaEncontrada.registrarSaque(valorSaque);
+
+        System.out.println("\nSaque realizado com sucesso!");
+        System.out.println("Novo saldo: R$ " + String.format("%.2f", contaEncontrada.getSaldo()));
+    }
+
+    private Conta buscarContaPorNumero(String numeroConta) {
+        for (Conta conta : contas) {
+            if (conta.getNumero().equals(numeroConta)) {
+                return conta;
+            }
+        }
+        return null;
+    }
+
+    private double lerValorOperacao(String nomeCampo) {
+        while (true) {
+            String valor = lerCampoObrigatorio(nomeCampo);
+            try {
+                return Double.parseDouble(valor.replace(',', '.'));
+            } catch (NumberFormatException e) {
+                System.out.println("Informe um valor numerico valido.");
+            }
+        }
+    }
+>>>>>>> Stashed changes
 }

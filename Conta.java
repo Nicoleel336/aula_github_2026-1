@@ -3,6 +3,8 @@ public class Conta {
     private final String tipo;
     private final double saldoInicial;
     private final Cliente cliente;
+    private double limiteDiarioSaque = 1000.00; 
+    private double saquesRealizadosHoje = 0.0;  
 
     public Conta(String numero, String tipo, double saldoInicial, Cliente cliente) {
         this.numero = numero;
@@ -26,6 +28,21 @@ public class Conta {
     public Cliente getCliente() {
         return cliente;
     }
+<<<<<<< Updated upstream
+=======
+    
+    public double getLimiteDisponivel() {
+        return limiteDiarioSaque - saquesRealizadosHoje;
+    }
+
+    public void registrarSaque(double valor) {
+        this.saquesRealizadosHoje += valor;
+    }
+    
+    public void debitar(double valor) {
+        this.saldo -= valor;
+    }
+>>>>>>> Stashed changes
 
     @Override
     public String toString() {
