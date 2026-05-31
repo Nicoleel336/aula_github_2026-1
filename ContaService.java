@@ -1,5 +1,5 @@
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -161,7 +161,6 @@ public class ContaService {
         
         contaEncontrada.registrarSaque(valorSaque);
 
-        contaEncontrada.debitar(valorSaque);
         System.out.println("\nSaque realizado com sucesso!");
         System.out.println("Novo saldo: R$ " + String.format("%.2f", contaEncontrada.getSaldo()));
     }
@@ -184,6 +183,43 @@ public class ContaService {
                 System.out.println("Informe um valor numerico valido.");
             }
         }
+    }
+
+    public void gerarRelatorioTransacoes() {
+        System.out.println("\n=== Relatorio de Transacoes ===");
+
+        if (contas.isEmpty()) {
+            System.out.println("Nenhuma conta cadastrada no sistema.");
+            return;
+        }
+
+        String numeroConta = lerCampoObrigatorio("Numero da conta");
+        Conta contaEncontrada = buscarContaPorNumero(numeroConta);
+
+        if (contaEncontrada == null) {
+            System.out.println("Erro: Conta nao encontrada.");
+            return;
+        }
+
+        System.out.println("\n======================================");
+        System.out.println("EXTRATO DA CONTA: " + contaEncontrada.getNumero());
+        System.out.println("Titular: " + contaEncontrada.getCliente().getNome());
+        System.out.println("Saldo Inicial: R$ " + String.format("%.2f", contaEncontrada.getSaldoInicial()));
+        System.out.println("======================================");
+
+        List<Transacao> historico = contaEncontrada.getTransacoes();
+
+        if (historico.isEmpty()) {
+            System.out.println("Nenhuma transacao realizada nesta conta.");
+        } else {
+            for (Transacao t : historico) {
+                System.out.println(t);
+            }
+        }
+
+        System.out.println("--------------------------------------");
+        System.out.println("Saldo Atual: R$ " + String.format("%.2f", contaEncontrada.getSaldo()));
+        System.out.println("======================================");
     }
 
 }

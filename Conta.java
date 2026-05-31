@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Conta {
     private final String numero;
     private final String tipo;
@@ -5,7 +8,8 @@ public class Conta {
     private double saldo;
     private final Cliente cliente;
     private double limiteDiarioSaque = 1000.00; 
-    private double saquesRealizadosHoje = 0.0;  
+    private double saquesRealizadosHoje = 0.0;
+    private List<Transacao> transacoes;  
 
     public Conta(String numero, String tipo, double saldoInicial, Cliente cliente) {
         this.numero = numero;
@@ -13,6 +17,7 @@ public class Conta {
         this.saldoInicial = saldoInicial;
         this.saldo = saldoInicial;
         this.cliente = cliente;
+        this.transacoes = new ArrayList<>();
     }
 
     public String getNumero() {
@@ -45,6 +50,14 @@ public class Conta {
     
     public void debitar(double valor) {
         this.saldo -= valor;
+    }
+
+    public List<Transacao> getTransacoes() {
+        return transacoes;
+    }
+
+    public void adicionarTransaacao(String tipo, double valor) {
+       this.transacoes.add(new Transacao(tipo, valor));
     }
 
     @Override
