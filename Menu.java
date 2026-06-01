@@ -1,11 +1,10 @@
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
-	private String title;
-	private List<String> options;
+	private final String title;
+	private final List<String> options;
+	private static final Scanner INPUT = new Scanner(System.in);
 
 	public Menu(List<String> options) {
 		this.title = "Menu";
@@ -27,8 +26,7 @@ public class Menu {
 			}
 
 			System.out.println("Informe a opcao desejada. ");
-			Scanner s = new Scanner(System.in);
-			String str = s.nextLine();
+			String str = INPUT.nextLine();
 			try {
 				op = Integer.parseInt(str);
 			}
